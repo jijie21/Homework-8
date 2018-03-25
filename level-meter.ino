@@ -1,12 +1,9 @@
-int sensorValue = 0;  // variable to store the value coming from the sensor
-int sensorPin = A0;    // select the input pin for the potentiometer
+int sensorValue = 0;  
+int sensorPin = A0;    
+int brightness = 0;
 
-
-// the setup function runs once when you press reset or power the board
 void setup() {
-  // initialize digital pin LED_BUILTIN as an output.
   pinMode(9, OUTPUT);
-
   Serial.begin(9600);
 }
 
@@ -20,17 +17,19 @@ void loop() {
     sensorValue = analogRead(sensorPin);
   } else if (sensorValue <= 256) {
     digitalWrite(9, HIGH);
+      brightness = brightness + sensorValue;
     sensorValue = analogRead(sensorPin);
-  } else if (sensorValue <= 511) {
+  } else if (sensorValue <= 512) {
     digitalWrite(9, HIGH);
+      brightness = brightness + sensorValue;
     sensorValue = analogRead(sensorPin);
   } else if (sensorValue <= 767) {
     digitalWrite(9, HIGH);
+      brightness = brightness + sensorValue;
     sensorValue = analogRead(sensorPin);
   }
   
-  delay(sensorValue);
+  delay(1);
   Serial.print(sensorValue);
-
   
 }
